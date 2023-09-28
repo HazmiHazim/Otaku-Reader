@@ -5,17 +5,21 @@ const { default: fonts } = require("../../theme/fonts");
 const bottomNav = StyleSheet.create({
     container: {
         display: 'flex',
-        width: 55,
-        flex: 1,
-        flexBasis: 200,
-        borderColor: colors.darkKnight,
-        backgroundColor: colors.backgroundPrimary,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        shadowColor: '#52006A',
     },
     content: {
         display: 'flex',
+        position: 'absolute',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: fonts.size.font12,
+        fontSize: fonts.size.font16,
+        color: colors.textWhite,
     },
 });
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import colors from "../../theme/colors";
 import fonts from "../../theme/fonts";
@@ -7,14 +8,14 @@ const input = StyleSheet.create({
         display: 'flex',
         padding: 16,
         borderRadius: 6,
+        width: '80%',
         height: 55,
-        backgroundColor: colors.backgroundSecondary,
+        backgroundColor: colors.textWhite,
     },
     text: {
         fontSize: fonts.size.font12,
-        lineHeight: 21,
         fontWeight: fonts.weight.normal,
-        colors: colors.textWhite,
+        color: colors.textWhite,
     },
 });
 
