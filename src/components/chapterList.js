@@ -14,7 +14,7 @@ const ChapterList = ({ chapter, navigation }) => {
                     return (
                         <TouchableOpacity onPress={() => navigation.navigate('Read', volume)} style={{backgroundColor: colors.backgroundSecondary}}
                             key={index} className="flex flex-row px-4 py-6 items-center justify-between my-2">
-                            <Text className="text-white text-xs">{chapterName.length > 35 ? chapterName.slice(0, 35) + '...' : chapterName }</Text>
+                            <Text className="text-white text-xs">{chapterName.length > 45 ? chapterName.slice(0, 40) + '...' : chapterName }</Text>
                             <Text className="text-white text-xs">{dateReleased}</Text>
                         </TouchableOpacity>
                     )

@@ -11,6 +11,8 @@ const colors = {
     darkKnight: '#333333',
     starBlaze: '#FC6601',
     persianRed: '#C82B28',
+    loveRed: '#E41B17',
+    plumpGray: '#514555',
 };
 
 export default colors;

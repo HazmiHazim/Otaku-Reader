@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Platform, StatusBar, Text, View, ScrollView } from "react-native";
+import { Platform, StatusBar, Text, View, ScrollView, TouchableOpacity } from "react-native";
 import bottomNav from "../ui/bottom-nav/bottomNav";
 import body from "../ui/body/body";
 import Svg, { Path } from "react-native-svg";
@@ -9,6 +9,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Fontisto";
 import NewRelease from "../components/newRelease";
 import MangaList from '../components/mangaList';
+import { useNavigation } from '@react-navigation/native';
+import Loading from '../components/loading';
 
 const ios = Platform.OS == 'ios';
 
@@ -16,6 +18,8 @@ const Home = () => {
     const [newRelease, setNewRelease] = useState([1, 2, 3]);
     const [popular, setPopular] = useState([1, 2, 3]);
     const [newManga, setNewManga] = useState([1, 2, 3]);
+    const [loading, setLoading] = useState(false);
+    const navigation = useNavigation();
 
     return (
         <LinearGradient start={{ x: 0.5, y: 0.0 }} end={{ x: 0.5, y: 1.0 }}
@@ -25,28 +29,31 @@ const Home = () => {
                 <View className="flex-row justify-between items-center mx-4 mt-10">
                     <Icon name="nav-icon-grid" size={30} color="white" />
                     <Text className="text-white text-3xl font-bold">HashManga</Text>
-                    <Icon name="search" size={30} color="white" />
+                    <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+                        <Icon name="search" size={30} color="white" />
+                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
 
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 10 }}>
-                {/** Latest Chapter Release */}
-                <NewRelease data={newRelease} />
+            {loading ? (<Loading />) : (
+                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 10 }}>
+                    {/** Latest Chapter Release */}
+                    <NewRelease data={newRelease} />
 
-                {/** Popular Manga */}
-                <MangaList title="Popular Manga" data={popular} />
+                    {/** Popular Manga */}
+                    <MangaList title="Popular Manga" data={popular} />
 
-                {/** New Manga */}
-                <MangaList title={"New Manga"} data={newManga} />
-            </ScrollView>
+                    {/** New Manga */}
+                    <MangaList title={"New Manga"} data={newManga} />
+                </ScrollView>
+            )}
         </LinearGradient>
     );
 };
 
 /* Bottom Bar
-<Svg>
-    <Path d="M-300,900 Q200,650 700,900" fill={colors.backgroundPrimary} />
-    <Text style={bottomNav.content}>My Name is Jeff</Text>
+<Svg className="flex-1 z-20 absolute bottom-0 left-0 right-0">
+    <Path d="M-300,900 Q200,650 700,900" fill={colors.backgroundSecondary} />
 </Svg>
 */
 
