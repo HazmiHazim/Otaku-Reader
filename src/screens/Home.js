@@ -18,7 +18,7 @@ const Home = () => {
     const [newManga, setNewManga] = useState([1, 2, 3]);
 
     return (
-        <LinearGradient start={{ x: 0.0, y: 0.25 }} end={{ x: 0.5, y: 1.0 }}
+        <LinearGradient start={{ x: 0.5, y: 0.0 }} end={{ x: 0.5, y: 1.0 }}
             colors={[colors.backgroundPrimary, colors.blackShadow]} style={body.layout}>
             <SafeAreaView className={ios ? "-mb-2" : "mb-3"}>
                 <StatusBar style="light" />

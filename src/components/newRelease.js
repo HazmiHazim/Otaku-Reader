@@ -7,7 +7,7 @@ var { width, height } = Dimensions.get('window');
 
 const NewRelease = ({ data }) => {
     const navigation = useNavigation();
-    const handleClick = () => {
+    const handleClick = (item) => {
         navigation.navigate('Manga', item);
     }
 
@@ -23,7 +23,7 @@ const NewRelease = ({ data }) => {
 
 const MangaCard = ({ item, handleClick }) => {
     return (
-        <TouchableWithoutFeedback onPress={handleClick}>
+        <TouchableWithoutFeedback onPress={() => handleClick(item)}>
             <Image source={require('./../assets/images/manga.png')}
                 style={{ width: width * 0.6, height: height * 0.4 }} className="rounded-3xl" />
         </TouchableWithoutFeedback>

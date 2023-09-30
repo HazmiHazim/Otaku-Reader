@@ -6,7 +6,8 @@ const { width, height } = Dimensions.get('window');
 const image = StyleSheet.create({
     layout: {
         width: width,
-        height: height,
+        height: height * 0.3,
+        resizeMode: 'stretch',
     },
 });
 

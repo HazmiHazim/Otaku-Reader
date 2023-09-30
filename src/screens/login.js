@@ -24,7 +24,7 @@ const Login = ({navigation}) => {
                     <Text style={button.text}>OR</Text>
                     <View style={styles.line}></View>
                 </View>
-                <Pressable style={[button.container, { backgroundColor: colors.PersianRed }]}>
+                <Pressable style={[button.container, { backgroundColor: colors.persianRed }]}>
                     <Icon name="google" style={[button.text, {fontSize: fonts.size.font20}]} />
                     <Text style={button.text}>Sign in with Google</Text>
                 </Pressable>

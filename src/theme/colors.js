@@ -10,7 +10,7 @@ const colors = {
     blackShadow: '#3A3153',
     darkKnight: '#333333',
     starBlaze: '#FC6601',
-    PersianRed: '#C82B28',
+    persianRed: '#C82B28',
 };
 
 export default colors;
