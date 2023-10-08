@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Platform, StatusBar, Text, View, ScrollView, TouchableOpacity } from "react-native";
 import bottomNav from "../ui/bottom-nav/bottomNav";
 import body from "../ui/body/body";
@@ -11,6 +11,8 @@ import NewRelease from "../components/newRelease";
 import MangaList from '../components/mangaList';
 import { useNavigation } from '@react-navigation/native';
 import Loading from '../components/loading';
+import { fetchPopularManga } from '../api/mangadb';
+import { getAuthentication, getRefreshToken } from '../api/authenticate';
 
 const ios = Platform.OS == 'ios';
 
@@ -20,6 +22,30 @@ const Home = () => {
     const [newManga, setNewManga] = useState([1, 2, 3]);
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation();
+
+    useEffect(() => {
+        //apiAuthentication();
+        //apiAuthenticationRefreshToken();
+        getPopularManga();
+    }, []);
+
+    /* Use for Authenticated API
+    const apiAuthentication = async () => {
+        const data = await getAuthentication();
+        console.log("Authenticate: ", data);
+    };
+
+    const apiAuthenticationRefreshToken = async () => {
+        const data = await getRefreshToken();
+        console.log("New Token: ", data);
+    }
+    */
+
+    const getPopularManga = async () => {
+        const data = await fetchPopularManga();
+        console.log("Popular Manga: ", data);
+        if (data && data.results) set
+    }
 
     return (
         <LinearGradient start={{ x: 0.5, y: 0.0 }} end={{ x: 0.5, y: 1.0 }}
