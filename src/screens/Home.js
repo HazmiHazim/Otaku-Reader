@@ -11,7 +11,7 @@ import NewRelease from "../components/newRelease";
 import MangaList from '../components/mangaList';
 import { useNavigation } from '@react-navigation/native';
 import Loading from '../components/loading';
-import { fetchPopularManga } from '../api/mangadb';
+import { fetchMangaCover, fetchNewRelease, fetchPopularManga } from '../api/mangadb';
 import { getAuthentication, getRefreshToken } from '../api/authenticate';
 
 const ios = Platform.OS == 'ios';
@@ -20,13 +20,14 @@ const Home = () => {
     const [newRelease, setNewRelease] = useState([1, 2, 3]);
     const [popular, setPopular] = useState([1, 2, 3]);
     const [newManga, setNewManga] = useState([1, 2, 3]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
 
     useEffect(() => {
         //apiAuthentication();
         //apiAuthenticationRefreshToken();
-        getPopularManga();
+        //getPopularManga();
+        getNewRelease();
     }, []);
 
     /* Use for Authenticated API
@@ -41,11 +42,20 @@ const Home = () => {
     }
     */
 
+    const getNewRelease = async () => {
+        const response = await fetchNewRelease();
+        console.log("New Release: ", response);
+        if (response && response.data) setNewRelease(response.data);
+        setLoading(false);
+    };
+
+    /*
     const getPopularManga = async () => {
         const data = await fetchPopularManga();
         console.log("Popular Manga: ", data);
         if (data && data.results) set
     }
+    */
 
     return (
         <LinearGradient start={{ x: 0.5, y: 0.0 }} end={{ x: 0.5, y: 1.0 }}
@@ -64,7 +74,7 @@ const Home = () => {
             {loading ? (<Loading />) : (
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 10 }}>
                     {/** Latest Chapter Release */}
-                    <NewRelease data={newRelease} />
+                    {newRelease.length > 0 && <NewRelease data={newRelease} />}
 
                     {/** Popular Manga */}
                     <MangaList title="Popular Manga" data={popular} />

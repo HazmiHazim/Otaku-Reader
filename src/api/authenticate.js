@@ -1,4 +1,6 @@
 import axios from "axios";
+
+{/** Create new class name 'confidential.js' and put your credentials inside the class. Then, import here */}
 import { USERNAME, PASSWORD, CLIENT_ID, CLIENT_PASSWORD } from '../api/confidential';
 
 // Initialize Refresh Token

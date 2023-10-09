@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableWithoutFeedback, Dimensions } from "react-native";
 import Carousel from 'react-native-snap-carousel';
+import { COVER_IMAGE } from '../api/mangadb';
 
 var { width, height } = Dimensions.get('window');
 
@@ -9,7 +10,7 @@ const NewRelease = ({ data }) => {
     const navigation = useNavigation();
     const handleClick = (item) => {
         navigation.navigate('Manga', item);
-    }
+    };
 
     return (
         <View className="mb-8">
@@ -22,9 +23,17 @@ const NewRelease = ({ data }) => {
 };
 
 const MangaCard = ({ item, handleClick }) => {
+    console.log("manga id: ", item.id);
+    let fileNameID = null;
+    const coverArt = item.relationships.find((relation) => relation.type === "cover_art");
+    if (coverArt) {
+        fileNameID = coverArt.attributes.fileName;
+        console.log("Filename: ", fileNameID);
+    }
+    
     return (
         <TouchableWithoutFeedback onPress={() => handleClick(item)}>
-            <Image source={require('./../assets/images/manga.png')}
+            <Image source={{ uri: COVER_IMAGE(item.id, fileNameID) }}
                 style={{ width: width * 0.6, height: height * 0.4 }} className="rounded-3xl" />
         </TouchableWithoutFeedback>
     );
