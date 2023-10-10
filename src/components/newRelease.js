@@ -23,13 +23,13 @@ const NewRelease = ({ data }) => {
 };
 
 const MangaCard = ({ item, handleClick }) => {
-    console.log("manga id: ", item.id);
+
     let fileNameID = null;
     const coverArt = item.relationships.find((relation) => relation.type === "cover_art");
     if (coverArt) {
         fileNameID = coverArt.attributes.fileName;
         console.log("Filename: ", fileNameID);
-    }
+    };
     
     return (
         <TouchableWithoutFeedback onPress={() => handleClick(item)}>

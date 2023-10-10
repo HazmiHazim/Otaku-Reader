@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Platform, StatusBar, Text, View, ScrollView, TouchableOpacity } from "react-native";
-import bottomNav from "../ui/bottom-nav/bottomNav";
 import body from "../ui/body/body";
-import Svg, { Path } from "react-native-svg";
 import colors from "../theme/colors";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,7 +9,7 @@ import NewRelease from "../components/newRelease";
 import MangaList from '../components/mangaList';
 import { useNavigation } from '@react-navigation/native';
 import Loading from '../components/loading';
-import { fetchMangaCover, fetchNewRelease, fetchPopularManga } from '../api/mangadb';
+import { fetchNewManga, fetchNewRelease, fetchPopularManga } from '../api/mangadb';
 import { getAuthentication, getRefreshToken } from '../api/authenticate';
 
 const ios = Platform.OS == 'ios';
@@ -26,8 +24,9 @@ const Home = () => {
     useEffect(() => {
         //apiAuthentication();
         //apiAuthenticationRefreshToken();
-        //getPopularManga();
         getNewRelease();
+        getPopularManga();
+        getNewManga();
     }, []);
 
     /* Use for Authenticated API
@@ -44,18 +43,22 @@ const Home = () => {
 
     const getNewRelease = async () => {
         const response = await fetchNewRelease();
-        console.log("New Release: ", response);
+        //console.log("New Release: ", response);
         if (response && response.data) setNewRelease(response.data);
         setLoading(false);
     };
 
-    /*
     const getPopularManga = async () => {
-        const data = await fetchPopularManga();
-        console.log("Popular Manga: ", data);
-        if (data && data.results) set
-    }
-    */
+        const response = await fetchPopularManga();
+        //console.log("Popular Manga: ", response);
+        if (response && response.data) setPopular(response.data);
+    };
+    
+    const getNewManga = async () => {
+        const response = await fetchNewManga();
+        //console.log("New Manga: ", response);
+        if (response && response.data) setNewManga(response.data);
+    };
 
     return (
         <LinearGradient start={{ x: 0.5, y: 0.0 }} end={{ x: 0.5, y: 1.0 }}
