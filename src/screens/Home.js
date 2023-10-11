@@ -83,7 +83,7 @@ const Home = () => {
                     <MangaList title="Popular Manga" data={popular} />
 
                     {/** New Manga */}
-                    <MangaList title={"New Manga"} data={newManga} />
+                    <MangaList title="New Manga" data={newManga} />
                 </ScrollView>
             )}
         </LinearGradient>

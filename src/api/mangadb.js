@@ -2,9 +2,9 @@ import axios from "axios";
 
 // Endpoints
 const API_BASE_URL = "https://api.mangadex.dev";
-const NEW_RELEASE = `${API_BASE_URL}/manga?limit=5&order[latestUploadedChapter]=desc&includes[]=manga&includes[]=cover_art`;
-const POPULAR_MANGA = `${API_BASE_URL}/manga?limit=10&order[rating]=desc&includes[]=manga&includes[]=cover_art`;
-const NEW_MANGA = `${API_BASE_URL}/manga?limit=10&order[createdAt]=desc&includes[]=manga&includes[]=cover_art`;
+const NEW_RELEASE = `${API_BASE_URL}/manga?limit=5&order[latestUploadedChapter]=desc&includes[]=manga&includes[]=cover_art&contentRating[]=safe`;
+const POPULAR_MANGA = `${API_BASE_URL}/manga?limit=10&order[rating]=desc&includes[]=manga&includes[]=cover_art&contentRating[]=safe`;
+const NEW_MANGA = `${API_BASE_URL}/manga?limit=10&order[createdAt]=desc&includes[]=manga&includes[]=cover_art&contentRating[]=safe`;
 
 export const COVER_IMAGE = (mangaID, fileName) => fileName ? `https://uploads.mangadex.org/covers/${mangaID}/${fileName}` : null;
 

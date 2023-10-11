@@ -28,7 +28,7 @@ const MangaCard = ({ item, handleClick }) => {
     const coverArt = item.relationships.find((relation) => relation.type === "cover_art");
     if (coverArt) {
         fileNameID = coverArt.attributes.fileName;
-        console.log("Filename: ", fileNameID);
+        //console.log("Filename: ", fileNameID);
     };
     
     return (

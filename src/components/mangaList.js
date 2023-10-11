@@ -26,13 +26,19 @@ const MangaList = ({ title, data, hideSeeAll }) => {
                 contentContainerStyle={{ paddingHorizontal: 15 }}>
                 {
                     data.map((item, index) => {
-                        //console.log("manga Title: ", item.attributes.title);
                         //console.log("Item Relationship: ", item.relationships);
                         let fileNameID = null;
-                        const coverArt = item.relationships.find((relation) => relation.type === "cover_art");
-                        if (coverArt) {
-                            fileNameID = coverArt.attributes.fileName;
-                            console.log("Filename: ", fileNameID);
+                        if (item.relationships && Array.isArray(item.relationships)) {
+                            const coverArt = item.relationships.find((relation) => relation.type === "cover_art");
+                            if (coverArt) {
+                                fileNameID = coverArt.attributes.fileName;
+                                //console.log("Filename: ", fileNameID);
+                            }
+                        }
+
+                        if (item.attributes && item.attributes.title) {
+                            mangaName = item.attributes.title.en;
+                            //console.log("manga Title: ", mangaName);
                         }
 
                         return [
