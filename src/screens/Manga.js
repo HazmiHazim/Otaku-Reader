@@ -10,6 +10,7 @@ import button from "../ui/button/button";
 import ChapterList from "../components/chapterList";
 import MangaList from "../components/mangaList";
 import Loading from "../components/loading";
+import { COVER_IMAGE, fetchMangaDetails } from "../api/mangadb";
 
 var { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
@@ -22,10 +23,39 @@ const Manga = () => {
     const [relatedManga, setRelatedManga] = useState([1, 2, 3, 4, 5]);
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation();
+    const [manga, setManga] = useState({});
     let mangaName = "One Punch Man - The Strongest Hero";
     useEffect(() => {
         // Call the mangadex api
+        //console.log("item: ", item.id);
+        setLoading(true);
+        getMangaDetails(item.id);
     }, [item]);
+
+    const getMangaDetails = async (mangaID) => {
+        const response = await fetchMangaDetails(mangaID);
+        if (response && response.data) setManga(response.data);
+        //console.log("Response: ", response.data);
+        setLoading(false);
+    };
+
+    let fileNameID = null;
+    let authorName = null;
+    const coverArt = item.relationships.find((relation) => relation.type === "cover_art");
+    const author = item.relationships.find((relation) => relation.type === "author");
+    if (author) {
+        //authorName = author.attributes.name;
+        console.log("test: ", author);
+    }
+    if (coverArt) {
+        fileNameID = coverArt.attributes.fileName;
+        //console.log("Filename: ", coverArt);
+    };
+
+    if (item.attributes && item.attributes.title) {
+        mangaName = item.attributes.title.en;
+        //console.log("manga Title: ", mangaName);
+    };
 
     return (
         <LinearGradient start={{ x: 0.5, y: 0.0 }} end={{ x: 0.5, y: 1.0 }}
@@ -44,7 +74,7 @@ const Manga = () => {
                             </TouchableOpacity>
                         </SafeAreaView>
                         <View>
-                            <Image source={require('../assets/images/manga.png')} style={{ width, height: height * 0.45, resizeMode: "stretch" }} />
+                            <Image source={{uri: COVER_IMAGE(item.id, fileNameID)}} style={{ width, height: height * 0.45, resizeMode: "stretch" }} />
                             <LinearGradient start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 1 }}
                                 colors={['rgba(0, 0, 0, 0)', 'rgba(54, 57, 73, 0.5)', 'rgba(54, 57, 73, 0.5)']}
                                 style={{ width, height: height }} className="absolute bottom-0" />

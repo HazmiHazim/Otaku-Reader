@@ -15,9 +15,9 @@ import { getAuthentication, getRefreshToken } from '../api/authenticate';
 const ios = Platform.OS == 'ios';
 
 const Home = () => {
-    const [newRelease, setNewRelease] = useState([1, 2, 3]);
-    const [popular, setPopular] = useState([1, 2, 3]);
-    const [newManga, setNewManga] = useState([1, 2, 3]);
+    const [newRelease, setNewRelease] = useState([]);
+    const [popular, setPopular] = useState([]);
+    const [newManga, setNewManga] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
 

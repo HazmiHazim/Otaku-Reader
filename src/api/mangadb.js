@@ -8,6 +8,9 @@ const NEW_MANGA = `${API_BASE_URL}/manga?limit=10&order[createdAt]=desc&includes
 
 export const COVER_IMAGE = (mangaID, fileName) => fileName ? `https://uploads.mangadex.org/covers/${mangaID}/${fileName}` : null;
 
+// dynamic endpoints
+const MANGA_DETAILS = (mangaID) => `${API_BASE_URL}/manga/${mangaID}?includes[]=cover_art&includes[]=author`;
+
 const apiCall = async (endpoint, params) => {
     const options = {
         method: 'GET',
@@ -35,3 +38,7 @@ export const fetchPopularManga = () => {
 export const fetchNewManga = () => {
     return apiCall(NEW_MANGA);
 };
+
+export const fetchMangaDetails = (mangaID) => {
+    return apiCall(MANGA_DETAILS(mangaID));
+}
